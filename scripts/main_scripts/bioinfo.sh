@@ -4,10 +4,7 @@
 # cd in that directory and create new directories for every marker analyzed.
 
 # set the directories structure
-#mkdir -p ./{sites_selection,\
-			scripts,\
-			statistics_analyses,\
-			raw/{trimmed_R1,\
+#mkdir -p ./{raw/{trimmed_R1,\
 				trimmed_R2},\
 			bioinfo_analyses/{align,\
 							denoising,\
