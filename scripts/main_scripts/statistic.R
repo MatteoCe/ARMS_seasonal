@@ -1120,9 +1120,16 @@ modeld <- list()
 modele <- list()
 modelf <- list()
 
+# store the sample names of the training datasets selected in each one of the
+# 100 trials
+
+training_sets <- data.frame(matrix(0, ncol = ntrial, nrow = 93), row.names = seq(1, 93))
+colnames(training_sets) <- seq(1, 100)
+
 for (i in 1:ntrial) {
 
-# create training and validation datasets:
+# create training and validation datasets (for the training dataset, 
+# 2/3 of original number of samples):
 
 data_set_size <- floor(nrow(tab)/1.5)
 # Generate a random sample of "data_set_size" indexes
@@ -1130,6 +1137,9 @@ indexes <- sample(1:nrow(tab), size = data_set_size)
 # Assign the data to the correct sets
 training <- tab[indexes, ]
 validation1 <- tab[-indexes, ]
+
+# register sample names of training set in a dataframe
+training_sets[, i] <- rownames(training)
 
 # run the different models
 GAMMa <- gam(Observed ~ s(temp_mean) + s(id_site, bs = "re"),
@@ -1275,6 +1285,15 @@ modd_fix[[paste0(i, "_", j)]] <- resPatd_fix
 
 }
 
+# store the sample names for each training set as a tsv file for 
+# reproducibility of figures. Validation datasets can be recreated by selecting 
+# the samples in the original tab that were not included in each training set
+write.table(training_sets, file = "training_sets.tsv",
+                         col.names = NA,
+                         row.names = TRUE,
+                         quote = FALSE,
+                         sep = "\t",
+                         fileEncoding = "UTF-8")
 
 names(moda) <- c(1:length(moda))
 moda.df <- data.frame(rbindlist(moda, idcol = "name"))
@@ -1315,7 +1334,7 @@ res2_ord$nvar <- factor(res2_ord$nvar, levels = c("Single", "Multiple"))
 violins <- ggplot(res2_ord) +
                   facet_grid(~ nvar, scales = "free", space = 'free') +
                   geom_violin(aes(col,value), fill = '#A4A4A4', alpha = .5) +
-                  scale_y_continuous(limits = quantile(res2_ord$value, c(.01, .99))) +
+                  #scale_y_continuous(limits = quantile(res2_ord$value, c(.01, .99))) +
                   theme_minimal() +
                   xlab("Fixed effects") +
                   ylab("RMSE") +
