@@ -1,12 +1,12 @@
 # ARMS/Seasonality pipeline
 
-This repository store the scripts used in the paper "XXX" to perform the bioinformatic and statistical analyses. The flowchart in the README.md file describe the main steps performed by the analyses, additional information can be recovered from the comments in the scripts and in the method section of the paper.
+This repository store the scripts used in the paper "Seasonality of primary production, rather than its magnitude, explains the richness of pioneer hard-bottom animals at the global scale." to perform the bioinformatic and statistical analyses. The flowchart in the README.md file describe the main steps performed by the analyses, additional information can be recovered from the comments in the scripts and in the method section of the paper.
 
 ## Table of Contents
 
 - [Usage](#usage)
 - [Contact](#Contact)
-- [Programs versions](#Programs versions)
+- [ProgramsVersions](#ProgramsVersions)
 - [References](#references)
 
 ## Usage
