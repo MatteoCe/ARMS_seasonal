@@ -6,7 +6,7 @@ This repository store the scripts used in the paper "Seasonality of primary prod
 
 - [Usage](#usage)
 - [Contact](#Contact)
-- [ProgramsVersions](#ProgramsVersions)
+- [Programs versions](#Programs-versions)
 - [References](#references)
 
 ## Usage
