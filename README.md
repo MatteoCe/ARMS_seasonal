@@ -1,6 +1,6 @@
 # ARMS/Seasonality pipeline
 
-This repository store the scripts used in the paper "Seasonality of primary production, rather than its magnitude, explains the richness of pioneer hard-bottom animals at the global scale." to perform the bioinformatic and statistical analyses. The flowchart in the README.md file describe the main steps performed by the analyses, additional information can be recovered from the comments in the scripts and in the method section of the paper.
+This repository store the scripts used in the paper from Cecchetto et al.<sup>1</sup> "Seasonality of primary production, rather than its magnitude, explains the richness of pioneer hard-bottom animals at the global scale." to perform the bioinformatic and statistical analyses. The flowchart in the README.md file describe the main steps performed by the analyses, additional information can be recovered from the comments in the scripts and in the method section of the paper.
 
 ## Table of Contents
 
@@ -81,18 +81,24 @@ Release:			20.04
 Codename:		focal
 
 - **phyloseq** (1.42.0)
-- **tidyverse** (1.3.2)
-- **lattice** (0.20.45)
+- **tidyverse** (2.0.0)
+- **lattice** (0.22.5)
 - **cowplot** (1.1.1)
 - **data.table** (1.14.6)
-- **mgcv** (1.8.41)
-- **fitdistrplus** (1.1.8)
+- **mgcv** (1.9.0)
+- **fitdistrplus** (1.1.11)
 - **corrplot** (0.92)
 - **olsrr** (0.5.3)
 - **ncf** (1.3.2)
 - **Metrics** (0.1.4)
 - **gratia** (0.8.1)
+- **patchwork** (1.1.3)
+- **RColorBrewer** (1.1.3)
 
 Please refer to the respective links for instructions on how to install each package or program.
 
+The final OTU table is provided in the directory "statistical\_analyses/", in order to reproduce exclusively the final analyses following the script "statistic.R" in the path "scripts/main\_scripts/".
+
 ## References
+
+1 - Cecchetto et al. ???
