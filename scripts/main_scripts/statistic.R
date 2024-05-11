@@ -788,17 +788,21 @@ sink()
 
 # create dummy data.frame for the legend, and use the same limit for the colors
 # colors of the linear predictor in the next plot
-df <- data.frame(x = c(1,2), 
-                 group = factor(c("0", "350"), 
-                                levels = c("350", "0")))
+df <- data.frame(x = seq(1:100), 
+                 value = c(50, sample(x=seq(51, 299), size = 98), 300))
+
 # create fake plot for the legend
-pleg2 <- ggplot(df) + 
-         geom_bar(aes(x = factor(x),
-                      fill = group),
-                  colour = "black") + 
-         scale_fill_manual(values = c(sort(heat.colors(2), 
-                                           decreasing = TRUE)), 
-                           name = "OTU\nnumber")
+pleg2 <- ggplot(df, aes(x = x, y)) +
+         geom_bar(aes(fill = value), stat = "identity") + 
+         scale_fill_gradient(low = c(sort(heat.colors(2), 
+                                           decreasing = TRUE)[2]),
+                                high = c(sort(heat.colors(2), 
+                                           decreasing = TRUE)[1]),
+                           name = "OTU\nnumber\n",
+                           labels = seq(from = 50, to = 300, by = 50),
+                           n.breaks = length(seq(from = 50, to = 300, by = 50)),
+                           limits = c(50, 300))
+
 
 # extract the legend
 leg2 <- ggpubr::get_legend(pleg2)
