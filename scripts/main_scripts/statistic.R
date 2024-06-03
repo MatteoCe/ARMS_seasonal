@@ -16,6 +16,7 @@ library(gratia)
 library(RColorBrewer)
 library(patchwork)
 library(cowplot)
+library(plotrix)
 
 ### DATASET PREPARATION
 
@@ -865,30 +866,34 @@ ggsave("plots/Figure2_NSI_NPP models effects.jpg", plot = models_effects,
 # such as Sea Surface Temperature, Chlorophyll and Net primary productivity alone
 
 coefs <- list()
-models_gam_list <- list()
 
-mod_res <- as.data.frame(cbind(c("npp_nsi", 
-                                 "chl_mean",
-                                 "npp_mean",
-                                 "npp_total",
-                                 "sst_mean"), c("NSI",
-                                                "CHL mean",
-                                                "NPP mean",
-                                                "Total NPP",
-                                                "SST mean")))
-colnames(mod_res) <- c("vars", "names")
+mod_res <- data.frame(vars = c("npp_nsi",
+                               "npp_total",
+                               "sst_mean",
+                               "chl_mean",
+                               "npp_mean"),
+                      names = c("NSI",
+                                "Total NPP",
+                                "SST mean",
+                                "CHL mean",
+                                "NPP mean"))
+
+mod_expr <- list("1" = "degree of seasonality",
+                 "2" = expression("g" %*% "m" ^-2 %*% "year" ^-1),
+                 "3" = expression("C" ^o),
+                 "4" = expression("mg" %*% "m" ^3),
+                 "5" = expression("g" %*% "m" ^-2 %*% "day" ^-1))
 
 # print Figure 3
 png("plots/Figure3_Alternative GAMs smoothers.png", units = "cm",
-                                      width = 20,
-                                      height = 23,
+                                      width = 25,
+                                      height = 15,
                                       res = 300)
-op <- par(mfrow = c(3, 2))
+op <- par(mfrow = c(2, 3))
 
 for (i in seq(1, nrow(mod_res))) {
 
     tab_name <- mod_res[i, ]$vars
-    off_name <- mod_res[i, ]$names
 
     formula <- substitute(Observed ~ s(x) + 
                                      s(id_site, bs = "re"),
@@ -898,30 +903,57 @@ for (i in seq(1, nrow(mod_res))) {
                           method = "REML",
                           data = tab)
 
-    models_gam_list[[paste0("GAM", i)]] <- model
-
     sum <- summary(model)
 
     # extract estimated degrees of freedom and p value for the fixed effect
-    edf <- round(sum$edf, 2)[1]
+    chi.sq <- round(sum$chi.sq, 2)[1]
     pv <- round(sum$s.table[1, 4], 3)
 
-    if (pv == 0) {pv <- "<2e-16"
-        } else {
-        }
+    if (pv == 0) {pv <- "<2e-16 ***"
+        } else if (pv > 0.01 && pv < 0.5) {
+          paste(pv, "*")
+        } else {}
 
-    par_names <- c("edfs", "p-value")
-    pars_gam <- cbind(edf, pv)
+    par_names <- c("chi-square", "p-value")
+    pars_gam <- cbind(chi.sq, pv)
     colnames(pars_gam) <- par_names
 
     coefs[[i]] <- pars_gam
 
-    plot(model, 
+    if (i == 1 || i == 4) {
+
+      plot(model, 
          select = 1,
-         main = paste("df:", edf, "\n", "p-value", pv),
-         xlab = off_name,
-         ylab = "#OTUs")
+         main = mod_res[i, ]$names,
+         xlab = mod_expr[[i]],
+         ylab = "Partial effect on linear predictor")
+
+    } else {
+
+      plot(model, 
+           select = 1,
+           main = mod_res[i, ]$names,
+           xlab = mod_expr[[i]],
+           ylab = "")
+
     }
+
+}
+
+grobTable <- do.call(rbind, coefs)
+rownames(grobTable) <- mod_res$names
+
+plot.new()
+addtable2plot(0, 0, grobTable,
+              xjust = .1,
+              yjust = 1,
+              bty = "n",
+              display.rownames = TRUE,
+              hlines = TRUE,
+              vlines = FALSE,
+              cex = 1.2,
+              ypad = 2,
+              xpad = .1)
 
 par(op)
 dev.off()
