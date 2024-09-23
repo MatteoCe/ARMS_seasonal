@@ -1,6 +1,6 @@
 # ARMS/Seasonality pipeline
 
-This repository store the scripts used in the paper from Cecchetto et al.<sup>1</sup> "Seasonality of primary production, rather than its magnitude, explains the richness of pioneer hard-bottom animals at the global scale." to perform the bioinformatic and statistical analyses. The flowchart in the README.md file describe the main steps performed by the analyses, additional information can be recovered from the comments in the scripts and in the method section of the paper.
+This repository store the scripts used in the paper from Cecchetto et al.<sup>1</sup> "Seasonality of primary production explains the richness of pioneering benthic communities" to perform the bioinformatic and statistical analyses. The flowchart in the README.md file describe the main steps performed by the analyses, additional information can be recovered from the comments in the scripts and in the method section of the paper.
 
 ## Table of Contents
 
@@ -101,4 +101,4 @@ The final OTU table is provided in the directory "statistical\_analyses/", in or
 
 ## References
 
-1 - Cecchetto et al. ???
+1 - Cecchetto et al. (2024) - https://doi.org/10.1038/s41467-024-52673-z
