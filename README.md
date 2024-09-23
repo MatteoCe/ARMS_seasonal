@@ -33,6 +33,12 @@ The scripts provided in this repository perform the following steps:
 
 Please refer to the individual scripts for more detailed information and instructions on how to use them.
 
+## License
+
+You are free to modify and use this script in your projects. If you use this script, we kindly request you to cite our paper as follows:
+
+[Author(s)]: "Title of the Paper," Conference/Journal Name, Year. [DOI or URL](link to the paper)
+
 ## Contact
 
 Inquiries can be forwarded to matteocecchetto@gmail.com
