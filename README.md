@@ -37,7 +37,7 @@ Please refer to the individual scripts for more detailed information and instruc
 
 You are free to modify and use this script in your projects. If you use this script, we kindly request you to cite our paper as follows:
 
-[Author(s)]: "Title of the Paper," Conference/Journal Name, Year. [DOI or URL](link to the paper)
+Cecchetto, M., Dettai, A., Gallut, C. et al. Seasonality of primary production explains the richness of pioneering benthic communities. Nat Commun 15, 8340 (2024). https://doi.org/10.1038/s41467-024-52673-z
 
 ## Contact
 
@@ -107,4 +107,4 @@ The final OTU table is provided in the directory "statistical\_analyses/", in or
 
 ## References
 
-1 - Cecchetto et al. (2024) - https://doi.org/10.1038/s41467-024-52673-z
+1 - Cecchetto, M., Dettai, A., Gallut, C. et al. Seasonality of primary production explains the richness of pioneering benthic communities. Nat Commun 15, 8340 (2024). https://doi.org/10.1038/s41467-024-52673-z
